@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -15,11 +17,15 @@ public class TUser {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
+	@Size(min=2, message="Name is too short")
 	private String name;
 	
 	@Column(unique = true)
+	@NotNull
 	private String username;
 	
+	@NotNull
 	private String password;
 	
 	public TUser() {
