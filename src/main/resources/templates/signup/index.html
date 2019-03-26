@@ -5,27 +5,27 @@
 		<link rel="stylesheet" href="/public/signup/style.css">
 		<script src="/public/signup/script.js"></script>
 	</head>
-	<body class="container">
-		
-		<form name="signup-form" th:action="@{/signup}" th:object="${TUser}" method="post">
-				<legend>Signup</legend>
-				<fieldset>
-					<label for="name">Name</label>
-					<input type="text" name="name" th:field="*{name}">
-					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
-				</fieldset>
-				<fieldset>
-					<label for="username">Username</label>
-					<input type="text" name="username" th:field="*{username}">
-					<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
-				</fieldset>
-				<fieldset>
-					<label for="password">Password</label>
-					<input type="password" name="password" th:field="*{password}">
-					<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
-				</fieldset>
-				<input type="submit" value="Register" class="btn btn-success">
-		</form>
-		
+	<body th:insert="fragments/layout :: common_body(content)" th:with="content=~{::content}">
+		<div class="container" th:fragment="content">
+			<form name="signup-form" th:action="@{/signup}" th:object="${TUser}" method="post">
+					<legend>Signup</legend>
+					<fieldset>
+						<label for="name">Name</label>
+						<input type="text" name="name" th:field="*{name}">
+						<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+					</fieldset>
+					<fieldset>
+						<label for="username">Username</label>
+						<input type="text" name="username" th:field="*{username}">
+						<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
+					</fieldset>
+					<fieldset>
+						<label for="password">Password</label>
+						<input type="password" name="password" th:field="*{password}">
+						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+					</fieldset>
+					<input type="submit" value="Register" class="btn btn-success">
+			</form>
+		</div>
 	</body>
 </html>
