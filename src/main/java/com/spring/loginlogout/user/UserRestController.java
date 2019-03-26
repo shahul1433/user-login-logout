@@ -3,6 +3,8 @@ package com.spring.loginlogout.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRestController {
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPassword;
 	
 	@RequestMapping(value="/get-users", method=RequestMethod.GET)
 	public List<TUser> getUsers() {
@@ -21,7 +26,13 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public void signup(TUser user) {
+	public String signup(@RequestBody TUser user) {
+		
+		//Encrypt password before save;
+		user.setPassword(bCryptPassword.encode(user.getPassword()));
+		
 		userRepository.save(user);
+		
+		return "User registered successfully";
 	}
 }

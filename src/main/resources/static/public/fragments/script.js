@@ -1,7 +1,7 @@
 function doLogout(){
-	var url = window.location.origin + "/logout";
-	console.log(url);
-	$.post(url,{},function(data,status){
-		alert("Data : "+data+" , Status : "+status);
+	var urlLogout = window.location.origin + "/logout";
+	var urlLogin = window.location.origin + "/login";
+	$.post(urlLogout,{},function(data,status){
+		location.replace(urlLogin);
 	});
 }

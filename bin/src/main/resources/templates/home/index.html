@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/layout :: common_header(~{::title},~{::link},~{::script})">
+		<title>Home</title>
+		<link rel="stylesheet" href="/public/home/style.css">
+		<script src="/public/home/script.js"></script>
+	</head>
+	<body ng-app="homeApp" ng-controller="homeController" th:insert="fragments/layout :: common_body(content)" th:with="content=~{::content}">
+		<div class="container-fluid" th:fragment="content">
+		    <table class="table">
+		    	<thead>
+		    		<tr>
+			    		<th>Name</th>
+			    		<th>Username</th>
+			    		<th>Password</th>
+		    		</tr>
+		    	</thead>
+		    	<tbody>
+		    		<tr ng-repeat="user in users">
+		    			<td>{{user.name}}</td>
+		    			<td>{{user.username}}</td>
+		    			<td>{{user.password}}</td>
+		    		</tr>
+		    	</tbody>
+		    </table>
+		    <a href="/signup">Register</a>
+		</div>
+	</body>
+</html>
